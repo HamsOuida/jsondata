@@ -1,0 +1,41 @@
+
+<head>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+
+<div class="container-fluid">
+    <div id="items-container" class="row"></div>
+  </div>
+
+
+<script>
+
+$(document).ready(function() {
+$.ajax({
+        url: 'data.json',
+        method: 'GET',
+        dataType: 'json',
+        success: function(data) {
+          console.log(typeof(data));
+          var html_to_append = '';
+          $.each(data, function(i, item) {
+            html_to_append +=
+            '<div class="col-3 mb-3"><div class="text-uppercase"><p>' +
+            item.pubDate + 
+            '<div class="col-3 mb-3"><div class="text-uppercase"><p>' +
+            item.author +
+            '</p></div><img  class="image img-fluid" src="' +
+            item.thumbnail +
+            '" /><p class="company">' +
+            item.guid +
+            '</p></div>';
+          });
+          $("#items-container").html(html_to_append);
+        },
+          error: function(data) {
+          }
+      });
+});
+</script>
